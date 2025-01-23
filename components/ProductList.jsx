@@ -1,31 +1,33 @@
-import Image from "next/image";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import ProductCard from './ProductCard';
 
-function ProductList({ productos }) {
+const ProductList = ({ category }) => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const url = category 
+                ? `https://dummyjson.com/products/category/${category}` 
+                : 'https://dummyjson.com/products';
+            const response = await fetch(url);
+            const data = await response.json();
+            setProducts(data.products || []);
+            setLoading(false);
+        };
+
+        fetchProducts();
+    }, [category]);
+
+    if (loading) return <div>Cargando productos...</div>;
 
     return (
-        <>
-            {productos.map((producto) => {
-                return (
-                    <article className="p-2 shadow-md rounded-md relative aspect-[1/1.15] overflow-hidden group" key={producto.id}>
-                        <Image
-                            src={producto.image1}
-                            //alt={`Thumbnail de ${producto.title}`}
-                            alt={`Thumbnail de ${producto.name}`}
-                            fill
-                            className="group-hover:scale-125 transition-all"
-                        />
-                        <div className="z-10 absolute bottom-0 bg-secondary/20 backdrop-blur-xl left-0 w-full p-2">
-                            <div className="flex justify-between">
-                                <h2 className="font-bold text-xl max-w-[180px] truncate">{producto.name}</h2>
-                                <p>$ {producto.price}</p>
-                            </div>
-                            <Link href={`/product/${producto.id}`}>ver mas</Link>
-                        </div>
-                    </article>
-                )
-            })}
-        </>
-    )
-}
-export default ProductList
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
+        </div>
+    );
+};
+
+export default ProductList;
