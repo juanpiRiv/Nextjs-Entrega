@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import { fetchProducts } from '@/app/api/products/products';// Importar desde el archivo de utilidades
 
 const ProductList = ({ category }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const url = category 
-                ? `https://dummyjson.com/products/category/${category}` 
-                : 'https://dummyjson.com/products';
-            const response = await fetch(url);
-            const data = await response.json();
-            setProducts(data.products || []);
-            setLoading(false);
+        const loadProducts = async () => {
+            try {
+                const data = await fetchProducts(category); // Usar función centralizada
+                setProducts(data);
+            } catch (error) {
+                console.error('Error al cargar productos:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
-        fetchProducts();
+        loadProducts();
     }, [category]);
 
     if (loading) return <div>Cargando productos...</div>;

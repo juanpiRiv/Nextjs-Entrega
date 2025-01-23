@@ -1,35 +1,44 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import ProductCard from '@/components/ProductCard';
-
-async function fetchProducts() {
-    const response = await fetch('https://dummyjson.com/products');
-    if (!response.ok) {
-        throw new Error('Error al obtener los productos');
-    }
-    const data = await response.json();
-    return data.products;
-}
+import { fetchProducts } from '@/app/api/products/products'; // Importar desde el archivo de utilidades
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getProducts = async () => {
-            const products = await fetchProducts();
-            setProducts(products);
+        const loadProducts = async () => {
+            try {
+                const data = await fetchProducts(); // Usar función centralizada
+                setProducts(data);
+            } catch (error) {
+                console.error('Error al cargar productos:', error);
+            } finally {
+                setLoading(false);
+            }
         };
 
-        getProducts();
+        loadProducts();
     }, []);
 
+    if (loading) return <div>Cargando productos...</div>;
+
     return (
-        <div style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-                {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />  
-                ))}
-            </div>
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '20px',
+                minHeight: '100vh',
+                padding: '20px',
+            }}
+        >
+            {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
         </div>
     );
 }

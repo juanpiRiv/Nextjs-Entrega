@@ -1,20 +1,39 @@
-export default async function handler(req, res) {
-    const { category } = req.query;
+const API_URL = 'https://dummyjson.com/products';
 
-    try {
-        const response = await fetch('https://dummyjson.com/products');
-        const data = await response.json();
+const cache = {}; // Objeto para almacenar en caché las respuestas
 
-        let products = data.products;
+// Obtener todos los productos o filtrar por categoría
+export async function fetchProducts(category) {
+    const url = category ? `${API_URL}/category/${category}` : API_URL;
 
-        // Filtrar por categoría si se pasa en la URL
-        if (category) {
-            products = products.filter(product => product.category.toLowerCase() === category.toLowerCase());
-        }
-
-        res.status(200).json(products);
-    } catch (error) {
-        console.error('Error al obtener productos desde DummyJSON:', error);
-        res.status(500).json({ error: 'Error al obtener productos' });
+    if (cache[url]) {
+        return cache[url]; // Si está en caché, reutilizar
     }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Error al obtener productos');
+    }
+
+    const data = await response.json();
+    cache[url] = data.products; // Guardar en caché
+    return data.products;
+}
+
+// Obtener producto por ID
+export async function fetchProductById(id) {
+    const url = `${API_URL}/${id}`;
+
+    if (cache[url]) {
+        return cache[url]; // Si está en caché, reutilizar
+    }
+
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Producto no encontrado');
+    }
+
+    const product = await response.json();
+    cache[url] = product; // Guardar en caché
+    return product;
 }

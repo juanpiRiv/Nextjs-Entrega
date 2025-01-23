@@ -16,13 +16,16 @@ const ProductCard = ({ product }) => {
                     width: '300px', // Tamaño uniforme en ancho
                     height: 'auto', // Altura dinámica para acomodar contenido
                     cursor: 'pointer',
-                    bgcolor: 'rgba(128, 128, 128, 0.8)', // Fondo gris semitransparente
-                    backdropFilter: 'blur(15px)', // Mayor desenfoque
+                    bgcolor: 'rgba(128, 128, 128, 0.3)', // Fondo gris semitransparente
+                    backdropFilter: 'blur(45px)', // Mayor desenfoque
                     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)', // Sombra moderna
                     borderRadius: '16px', // Bordes redondeados
                     overflow: 'hidden', // Evitar que contenido se desborde fuera de la tarjeta
                     display: 'flex',
                     flexDirection: 'column',
+                    padding: '10px',
+                    gap: '10px',
+                    alignSelf: 'center', // Centrar verticalmente
                     justifyContent: 'space-between', // Asegurar equilibrio en el diseño
                     transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
                     '&:hover': {

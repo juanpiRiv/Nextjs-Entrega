@@ -17,14 +17,31 @@ import Badge, { badgeClasses } from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
+
 const pages = ['Home', 'Productos', 'Contacto', 'Sobre nosotros'];
 const settings = ['Register', 'Login', 'Logout'];
-const CartBadge = styled(Badge)`
-& .${badgeClasses.badge} {
-    top: -8px;
-    right: -6px;
-}
-`;
+
+const CartBadge = styled(Badge)({
+    '& .MuiBadge-dot': {
+        top: -4,
+        right: -4,
+    },
+});
+
+const NavbarButton = styled(Button)(({ theme }) => ({
+    '&:hover': {
+        backgroundColor: theme.palette.primary.light,
+        transform: 'scale(1.05)',
+    },
+    padding: '8px 16px',
+    margin: '0 10px',
+    fontWeight: 600,
+    color: 'white',
+    '&.active': {
+        color: theme.palette.primary.main,
+    },
+}));
+
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -45,10 +62,9 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="sticky" sx={{ boxShadow: 3, bgcolor: 'background.default' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -60,11 +76,11 @@ function ResponsiveAppBar() {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
-                            color: 'black',
+                            color: 'white',
                             textDecoration: 'none',
                         }}
                     >
-                        Eccomerce
+                        Ishopping
                     </Typography>
 
                     {/* Menú para dispositivos pequeños */}
@@ -75,7 +91,7 @@ function ResponsiveAppBar() {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            color="black"
+                            sx={{ color: 'white' }} // Cambiar color a blanco
                         >
                             <MenuIcon />
                         </IconButton>
@@ -93,7 +109,6 @@ function ResponsiveAppBar() {
                             }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{ display: { xs: 'block', md: 'none', color: 'black' } }}
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -102,8 +117,7 @@ function ResponsiveAppBar() {
                                             page === 'Productos' ? '/products' :
                                                 page === 'Contacto' ? '/contact' :
                                                     page === 'Sobre nosotros' ? '/informacion' :
-                                                        page === 'Home' ? '/' :
-                                                            '/'
+                                                        page === 'Home' ? '/' : '/'
                                         }
                                         passHref
                                     >
@@ -117,26 +131,7 @@ function ResponsiveAppBar() {
                     </Box>
 
                     {/* Menú para dispositivos grandes */}
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'black',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Eccomerce
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', color: 'black' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Link
                                 key={page}
@@ -148,19 +143,17 @@ function ResponsiveAppBar() {
                                 }
                                 passHref
                             >
-                                <Button
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'black', display: 'block' }}
-                                >
+                                <NavbarButton>
                                     {page}
-                                </Button>
+                                </NavbarButton>
                             </Link>
                         ))}
                     </Box>
+
                     {/* Ícono del carrito con enlace */}
                     <Box sx={{ mr: 2 }}>
                         <Link href="/cart" passHref>
-                            <IconButton>
+                            <IconButton sx={{ color: 'white' }}> {/* Cambiar color a blanco */}
                                 <CartBadge badgeContent={2} color="primary" overlap="circular">
                                     <ShoppingCartIcon fontSize="small" />
                                 </CartBadge>
@@ -193,7 +186,9 @@ function ResponsiveAppBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography sx={{ color: 'black', textAlign: 'center' }}>{setting}</Typography>
+                                    <Typography sx={{ color: 'black', textAlign: 'center' }}>
+                                        {setting}
+                                    </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
