@@ -1,5 +1,6 @@
 "use client";
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,12 +13,18 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Badge, { badgeClasses } from '@mui/material/Badge';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
-
-const pages = ['Productos', 'Contacto', 'Sobre nosotros'];
-const settings = ['Profile', 'Account', 'Chart', 'Logout'];
-
+const pages = ['Home', 'Productos', 'Contacto', 'Sobre nosotros'];
+const settings = ['Register', 'Login', 'Logout'];
+const CartBadge = styled(Badge)`
+& .${badgeClasses.badge} {
+    top: -8px;
+    right: -6px;
+}
+`;
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -43,7 +50,7 @@ function ResponsiveAppBar() {
                 <Toolbar disableGutters>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         noWrap
                         component="a"
                         href="#"
@@ -57,7 +64,7 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO2
+                        Eccomerce
                     </Typography>
 
                     {/* Menú para dispositivos pequeños */}
@@ -93,9 +100,10 @@ function ResponsiveAppBar() {
                                     <Link
                                         href={
                                             page === 'Productos' ? '/products' :
-                                            page === 'Contacto' ? '/contact' :
-                                            page === 'Sobre nosotros' ? '/informacion' :
-                                            '/'
+                                                page === 'Contacto' ? '/contact' :
+                                                    page === 'Sobre nosotros' ? '/informacion' :
+                                                        page === 'Home' ? '/' :
+                                                            '/'
                                         }
                                         passHref
                                     >
@@ -126,7 +134,7 @@ function ResponsiveAppBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO3
+                        Eccomerce
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', color: 'black' } }}>
                         {pages.map((page) => (
@@ -134,9 +142,9 @@ function ResponsiveAppBar() {
                                 key={page}
                                 href={
                                     page === 'Productos' ? '/products' :
-                                    page === 'Contacto' ? '/contact' :
-                                    page === 'Sobre nosotros' ? '/informacion' :
-                                    '/'
+                                        page === 'Contacto' ? '/contact' :
+                                            page === 'Sobre nosotros' ? '/informacion' :
+                                                '/'
                                 }
                                 passHref
                             >
@@ -148,6 +156,16 @@ function ResponsiveAppBar() {
                                 </Button>
                             </Link>
                         ))}
+                    </Box>
+                    {/* Ícono del carrito con enlace */}
+                    <Box sx={{ mr: 2 }}>
+                        <Link href="/cart" passHref>
+                            <IconButton>
+                                <CartBadge badgeContent={2} color="primary" overlap="circular">
+                                    <ShoppingCartIcon fontSize="small" />
+                                </CartBadge>
+                            </IconButton>
+                        </Link>
                     </Box>
 
                     {/* Menú del usuario */}
