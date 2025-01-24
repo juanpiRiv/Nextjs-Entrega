@@ -1,11 +1,10 @@
 import React from 'react';
-import { fetchProductById } from '@/app/api/products/products'; // Importar desde el archivo de utilidades
+import { fetchProductById } from '@/app/api/products/products';
 
 export default async function ProductDetailPage({ params }) {
-    const { id } = params;
-
     try {
-        const product = await fetchProductById(id); // Usar función centralizada
+        // Asegurarse de que params.id sea válido
+        const product = await fetchProductById(params.id);
 
         return (
             <div style={{ padding: '20px' }}>
