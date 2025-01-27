@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore"; // Firestore
+import { getAnalytics } from "firebase/analytics"; // Analytics
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAELYebeX8fkkBzlTeY2I8U5H9EH1kBChk",
     authDomain: "nextjs-4bda5.firebaseapp.com",
@@ -16,6 +13,21 @@ const firebaseConfig = {
     measurementId: "G-FQE3QDQPCY"
 };
 
-// Initialize Firebase
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// Inicializar Firestore
+export const db = getFirestore(app); // Base de datos
+
+// Solo inicializar Analytics en el cliente
+export let analytics = null;
+
+if (typeof window !== "undefined") {
+    try {
+        analytics = getAnalytics(app);  // Esto solo se ejecutará en el cliente
+    } catch (error) {
+        console.error("Error al inicializar Analytics:", error);
+    }
+}
+
+export { db, analytics };  // Exporta analytics solo si está definido (en el cliente)
