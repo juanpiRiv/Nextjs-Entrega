@@ -1,3 +1,4 @@
+"use client";
 function Footer() {
     return (
         <footer className= "bg-primary text-white p-4 text-sm text-center">
