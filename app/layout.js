@@ -9,6 +9,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { metadata } from "@/app/metaData";
 import Footer from "@/components/Footer";
 import ProductList from "@/components/ProductList";
+import HomePage from "@/components/Homepage";
 
 
 metadata.title = "Create Next App";

@@ -1,7 +1,12 @@
+import HomePage from "@/components/Homepage";
+import BoxPresentacion from "@/components/BoxPresentacion";
+
 export default function Home() {
   return (
+    
     <main>
-      <h1>Welcome to my-app!</h1>
+      <BoxPresentacion />
+      <HomePage />
     </main>
   );
 }

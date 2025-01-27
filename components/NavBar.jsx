@@ -15,7 +15,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
-import AdbIcon from '@mui/icons-material/Adb';
 import Link from 'next/link';
 
 const pages = ['Home', 'Productos', 'Contacto', 'Sobre nosotros'];
@@ -65,23 +64,25 @@ function ResponsiveAppBar() {
         <AppBar position="sticky" sx={{ boxShadow: 3, bgcolor: 'background.default' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#"
+                    {/* Logo en vista de escritorio */}
+                    <Box
                         sx={{
-                            mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'white',
-                            textDecoration: 'none',
+                            mr: 2,
                         }}
                     >
-                        Ishopping
-                    </Typography>
+                        <Link href="/" passHref>
+                            <img
+                                src="/resize.svg"
+                                alt="Logo"
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    cursor: 'pointer',
+                                }}
+                            />
+                        </Link>
+                    </Box>
 
                     {/* Menú para dispositivos pequeños */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -114,20 +115,45 @@ function ResponsiveAppBar() {
                                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                                     <Link
                                         href={
-                                            page === 'Productos' ? '/products' :
-                                                page === 'Contacto' ? '/contact' :
-                                                    page === 'Sobre nosotros' ? '/informacion' :
-                                                        page === 'Home' ? '/' : '/'
+                                            page === 'Productos'
+                                                ? '/products'
+                                                : page === 'Contacto'
+                                                    ? '/contact'
+                                                    : page === 'Sobre nosotros'
+                                                        ? '/informacion'
+                                                        : page === 'Home'
+                                                            ? '/'
+                                                            : '/'
                                         }
                                         passHref
                                     >
-                                        <Typography sx={{ textAlign: 'center', color: 'black' }}>
-                                            {page}
-                                        </Typography>
+                                        <Typography sx={{ textAlign: 'center', color: 'black' }}>{page}</Typography>
                                     </Link>
                                 </MenuItem>
                             ))}
                         </Menu>
+                    </Box>
+
+                    {/* Logo centrado en vista móvil */}
+                    <Box
+                        sx={{
+                            paddingRight: 10,
+                            flexGrow: 1,
+                            display: { xs: 'flex', md: 'none' },
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Link href="/" passHref>
+                            <img
+                                src="/resize.svg"
+                                alt="Logo"
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    cursor: 'pointer',
+                                }}
+                            />
+                        </Link>
                     </Box>
 
                     {/* Menú para dispositivos grandes */}
@@ -136,16 +162,17 @@ function ResponsiveAppBar() {
                             <Link
                                 key={page}
                                 href={
-                                    page === 'Productos' ? '/products' :
-                                        page === 'Contacto' ? '/contact' :
-                                            page === 'Sobre nosotros' ? '/informacion' :
-                                                '/'
+                                    page === 'Productos'
+                                        ? '/products'
+                                        : page === 'Contacto'
+                                            ? '/contact'
+                                            : page === 'Sobre nosotros'
+                                                ? '/informacion'
+                                                : '/'
                                 }
                                 passHref
                             >
-                                <NavbarButton>
-                                    {page}
-                                </NavbarButton>
+                                <NavbarButton>{page}</NavbarButton>
                             </Link>
                         ))}
                     </Box>
@@ -153,7 +180,7 @@ function ResponsiveAppBar() {
                     {/* Ícono del carrito con enlace */}
                     <Box sx={{ mr: 2 }}>
                         <Link href="/cart" passHref>
-                            <IconButton sx={{ color: 'white' }}> {/* Cambiar color a blanco */}
+                            <IconButton sx={{ color: 'white' }}>
                                 <CartBadge badgeContent={2} color="primary" overlap="circular">
                                     <ShoppingCartIcon fontSize="small" />
                                 </CartBadge>
@@ -165,7 +192,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar src="/broken-image.jpg" />
+                                <Avatar src="/broken-image.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu

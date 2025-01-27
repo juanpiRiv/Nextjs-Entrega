@@ -1,26 +1,21 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_AUTH_DOMAIN",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_STORAGE_BUCKET",
-    messagingSenderId: "TU_MESSAGING_SENDER_ID",
-    appId: "TU_APP_ID",
+    apiKey: "AIzaSyAELYebeX8fkkBzlTeY2I8U5H9EH1kBChk",
+    authDomain: "nextjs-4bda5.firebaseapp.com",
+    projectId: "nextjs-4bda5",
+    storageBucket: "nextjs-4bda5.firebasestorage.app",
+    messagingSenderId: "45550953202",
+    appId: "1:45550953202:web:1b9bf1c4504f926775a66b",
+    measurementId: "G-FQE3QDQPCY"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Obtener productos desde Firebase
-export async function fetchProductsFromFirebase(category) {
-    const productsRef = collection(db, "products");
-    const q = query(productsRef, where("category", "==", category));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-    }));
-}
-}
+const analytics = getAnalytics(app);
