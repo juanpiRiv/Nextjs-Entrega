@@ -9,7 +9,6 @@ export default function ProductDetailPage({ params }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Usamos React.use para desempaquetar `params`
     const { id } = React.use(params);
 
     useEffect(() => {

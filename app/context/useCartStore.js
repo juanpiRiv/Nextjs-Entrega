@@ -1,8 +1,10 @@
 "use client";
 import { create } from "zustand";
 
-const useCartStore = create((set) => ({
+const useCartStore = create((set, get) => ({
     cart: [], // Estado inicial del carrito
+
+    // Agregar un producto al carrito
     addToCart: (product) =>
         set((state) => {
             const existingProduct = state.cart.find((item) => item.id === product.id);
@@ -17,8 +19,27 @@ const useCartStore = create((set) => ({
             }
             return { cart: [...state.cart, { ...product, quantity: product.quantity }] };
         }),
-    clearCart: () => set({ cart: [] }), // Limpiar el carrito
-    getTotalQuantity: () => set((state) => state.cart.reduce((total, item) => total + item.quantity, 0)), // Obtener cantidad total
+
+    // Limpiar el carrito
+    clearCart: () => set({ cart: [] }),
+
+    // Eliminar un producto del carrito
+    removeItem: (id) =>
+        set((state) => ({
+            cart: state.cart.filter((item) => item.id !== id),
+        })),
+
+    // Obtener la cantidad total de productos en el carrito
+    getTotalQuantity: () => {
+        const state = get();
+        return state.cart.reduce((total, item) => total + item.quantity, 0);
+    },
+
+    // Obtener el precio total del carrito
+    getTotalPrice: () => {
+        const state = get();
+        return state.cart.reduce((total, item) => total + item.quantity * item.price, 0);
+    },
 }));
 
 export default useCartStore;

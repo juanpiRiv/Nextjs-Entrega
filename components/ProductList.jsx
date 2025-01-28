@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import ProductCard from './ProductCard';
-import { fetchProducts } from '@/app/api/products/products';// Importar desde el archivo de utilidades
+import { useEffect, useState } from "react";
+import { getProducts } from "@app/actions/product";
 
-const ProductList = ({ category }) => {
+export default function ProductList() {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const loadProducts = async () => {
-            try {
-                const data = await fetchProducts(category); // Usar función centralizada
-                setProducts(data);
-            } catch (error) {
-                console.error('Error al cargar productos:', error);
-            } finally {
-                setLoading(false);
+        async function fetchData() {
+            const response = await getProducts();
+            if (!response.error) {
+                setProducts(response.payload);
             }
-        };
+        }
 
-        loadProducts();
-    }, [category]);
-
-    if (loading) return <div>Cargando productos...</div>;
+        fetchData();
+    }, []);
 
     return (
-        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+        <div>
             {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <div key={product.id}>
+                    <img src={product.thumbnail} alt={product.title} width={100} />
+                    <h2>{product.title}</h2>
+                </div>
             ))}
         </div>
     );
-};
-
-export default ProductList;
+}
