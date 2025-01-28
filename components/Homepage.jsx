@@ -6,7 +6,7 @@ import WatchTwoToneIcon from '@mui/icons-material/WatchTwoTone';
 
 const HomePage = () => {
     return (
-        <Box sx={{ backgroundColor: "secondary", padding: 4, minHeight: "90vh", mt: 6 }}>
+        <Box sx={{ backgroundColor: "secondary", padding: 8, minHeight: "60vh", mt: 5 }}>
             <Grid container spacing={4}>
                 {/* Tarjeta principal (grande) */}
                 <Grid item xs={12} md={8}>
@@ -68,7 +68,7 @@ const HomePage = () => {
                         }}
                     >
                         <CardContent>
-                            <WatchTwoToneIcon sx={{ marginRight: 6 }} />
+                            <WatchTwoToneIcon sx={{ marginRight: 6 , fontSize: 40 }} />
                             <Typography variant="h6" className="font-bold tracking-tighter">Relojes</Typography>
                             <Typography variant="body2" className="font-bold tracking-tighter">Relojes de alta calidad.</Typography>
                         </CardContent>
@@ -133,7 +133,7 @@ const HomePage = () => {
                         }}
                     >
                         <CardContent>
-                        <LocalShippingTwoToneIcon sx={{ marginRight: 6 }} />
+                        <LocalShippingTwoToneIcon sx={{ marginRight: 6, fontSize: 40 }} />
                             <Typography variant="h6" className="font-bold tracking-tighter">Entrega a Todo el País</Typography>
                             <Typography variant="body2" className="font-bold tracking-tighter">
                                 Compras mayores a $250000 son sin cargo.

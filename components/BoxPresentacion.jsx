@@ -41,8 +41,8 @@ export default function EcommercePresentation() {
                 </ul>
             </BoxReveal>
 
-            <RainbowButton href="/informacion" className="text-xl font-bold text-text mt-10">
-Sobre Nosotros
+            <RainbowButton href="/products" className="text-xl font-bold text-text mt-10">
+Ver todos los productos
 </RainbowButton>
         </section>
     );
