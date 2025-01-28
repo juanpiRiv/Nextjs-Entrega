@@ -40,16 +40,16 @@ const HomePage = () => {
                                 color: "#fff",
                             }}
                         >
-                            <Typography variant="overline" sx={{ color: "accent.main" }}>
+                            <Typography variant="overline" className="font-bold tracking-tighter" sx={{ color: "accent.main" }}>
                                 Oferta Especial
                             </Typography>
-                            <Typography variant="h4" gutterBottom>
+                            <Typography variant="h4" className="font-bold tracking-tighter"gutterBottom>
                                 Laptops
                             </Typography>
-                            <Typography variant="body1" sx={{ marginBottom: 2 }}>
+                            <Typography variant="body1" className=" tracking-tighter"sx={{ marginBottom: 2 }}>
                                 Última generación de computadoras portátiles.
                             </Typography>
-                            <Button variant="outlined" color="accent">
+                            <Button variant="outlined" className="font-bold tracking-tighter"color="accent">
                                 Explorar Colección →
                             </Button>
                         </CardContent>
@@ -69,8 +69,8 @@ const HomePage = () => {
                     >
                         <CardContent>
                             <WatchTwoToneIcon sx={{ marginRight: 6 }} />
-                            <Typography variant="h6">Relojes</Typography>
-                            <Typography variant="body2">Relojes de alta calidad.</Typography>
+                            <Typography variant="h6" className="font-bold tracking-tighter">Relojes</Typography>
+                            <Typography variant="body2" className="font-bold tracking-tighter">Relojes de alta calidad.</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -107,14 +107,14 @@ const HomePage = () => {
                                 color: "#fff",
                             }}
                         >
-                            <Typography variant="overline" sx={{ color: "accent.main" }}>
+                            <Typography variant="overline" className="font-bold tracking-tighter" sx={{ color: "accent.main" }}>
                                 Oferta Especial
                             </Typography>
-                            <Typography variant="h5">Smartwatches</Typography>
-                            <Typography variant="body2" sx={{ marginBottom: 2 }}>
+                            <Typography variant="h5"className="font-bold tracking-tighter">Smartwatches</Typography>
+                            <Typography variant="body2" className=" tracking-tighter" sx={{ marginBottom: 2 }}>
                                 Listos para ti.
                             </Typography>
-                            <Typography variant="h6" color="accent.main">
+                            <Typography variant="h6" className="font-bold tracking-tighter" color="accent.main">
                                 $195000 <s style={{ color: "#aaa" }}>$250000</s>
                             </Typography>
                         </CardContent>
@@ -134,8 +134,8 @@ const HomePage = () => {
                     >
                         <CardContent>
                         <LocalShippingTwoToneIcon sx={{ marginRight: 6 }} />
-                            <Typography variant="h6">Entrega a Todo el País</Typography>
-                            <Typography variant="body2">
+                            <Typography variant="h6" className="font-bold tracking-tighter">Entrega a Todo el País</Typography>
+                            <Typography variant="body2" className="font-bold tracking-tighter">
                                 Compras mayores a $250000 son sin cargo.
                             </Typography>
                         </CardContent>
@@ -173,11 +173,11 @@ const HomePage = () => {
                                 color: "#fff",
                             }}
                         >
-                            <Typography variant="h6">Tablets y accesorios</Typography>
-                            <Typography variant="body2" sx={{ marginBottom: 2 }}>
+                            <Typography variant="h6" className="font-bold tracking-tighter">Tablets y accesorios</Typography>
+                            <Typography variant="body2" className="tracking-tighter" sx={{ marginBottom: 2 }}>
                                 Lo que buscas para tu dispositivo.
                             </Typography>
-                            <Button variant="outlined" color="accent">
+                            <Button variant="outlined" className="font-bold tracking-tighter" color="accent">
                                 Contáctanos Ahora
                             </Button>
                         </CardContent>

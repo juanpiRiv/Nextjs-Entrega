@@ -27,23 +27,27 @@ export async function getProducts() {
 }
 
 // Obtener un producto por su ID desde Firestore
+// actions/product.js
 export async function getProductById(id) {
     if (!id) {
-        return null;
+        console.error("ID no proporcionado");
+        return { payload: null, message: "No se proporcionó un ID válido", error: true };
     }
 
     try {
+        console.log("Consultando Firestore para el producto con ID:", id);
         const productDoc = doc(db, "products", id);
         const snapshot = await getDoc(productDoc);
 
         if (!snapshot.exists()) {
-            return null;  // Producto no encontrado
+            console.log("Producto no encontrado en Firestore.");
+            return { payload: null, message: "El producto no existe", error: true };
         }
 
-        return { id: snapshot.id, ...snapshot.data() };  // Devolver todos los datos del producto
+        console.log("Producto encontrado:", snapshot.data());
+        return { payload: { id: snapshot.id, ...snapshot.data() }, message: "Se obtuvo el producto correctamente", error: false };
     } catch (error) {
         console.error("Error al obtener el producto:", error);
-        return null;
+        return { payload: null, message: "No se pudo obtener el producto", error: true };
     }
 }
-
