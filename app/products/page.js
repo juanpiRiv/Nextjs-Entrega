@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/app/actions/product"; // Usamos getProducts en lugar de fetchProducts
+import { getProducts } from "@/app/actions/product";
+import Load from "@/components/Load"; // Usamos getProducts en lugar de fetchProducts
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -43,7 +44,7 @@ export default function ProductsPage() {
         loadProducts();
     }, [category]);
 
-    if (loading) return <div>Cargando productos...</div>;
+    if (loading) return <Load/>;
     if (!products.length) return <div>No hay productos para mostrar.</div>;
 
     return (
