@@ -1,3 +1,4 @@
+"use client";
 import { create } from "zustand";
 
 const useCartStore = create((set) => ({
@@ -17,5 +18,7 @@ const useCartStore = create((set) => ({
             return { cart: [...state.cart, { ...product, quantity: product.quantity }] };
         }),
     clearCart: () => set({ cart: [] }), // Limpiar el carrito
+    getTotalQuantity: () => set((state) => state.cart.reduce((total, item) => total + item.quantity, 0)), // Obtener cantidad total
 }));
+
 export default useCartStore;

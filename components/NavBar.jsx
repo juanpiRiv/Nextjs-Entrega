@@ -13,9 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Badge, { badgeClasses } from '@mui/material/Badge';
+import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Link from 'next/link';
+import useCartStore from "@/app/context/useCartStore";
 
 const pages = ['Home', 'Productos', 'Contacto', 'Sobre nosotros'];
 const settings = ['Register', 'Login', 'Logout'];
@@ -44,6 +45,7 @@ const NavbarButton = styled(Button)(({ theme }) => ({
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const totalQuantity = useCartStore((state) => state.cart.reduce((total, item) => total + item.quantity, 0));
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -181,7 +183,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ mr: 2 }}>
                         <Link href="/cart" passHref>
                             <IconButton sx={{ color: 'white' }}>
-                                <CartBadge badgeContent={2} color="primary" overlap="circular">
+                                <CartBadge badgeContent={totalQuantity} color="primary" overlap="circular">
                                     <ShoppingCartIcon fontSize="small" />
                                 </CartBadge>
                             </IconButton>
