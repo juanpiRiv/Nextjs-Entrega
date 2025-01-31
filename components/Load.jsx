@@ -1,4 +1,5 @@
 // components/Loading.js
+"use client";
 import React from "react";
 import { CircularProgress } from "@mui/material"; // Asegúrate de que también tienes MUI instalado
 

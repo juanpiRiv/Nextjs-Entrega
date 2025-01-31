@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { getProducts } from "@/app/actions/product";
-import Load from "@/components/Load"; // Usamos getProducts en lugar de fetchProducts
+import Load from "@/components/Load";
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -11,40 +11,38 @@ export default function ProductsPage() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
 
-    const allowedCategories = ["laptops", "tablets", "mens-watches", "mobile-accessories"];
-
-    // Cargar productos desde Firestore
+    // 🔹 Cargar productos desde Firestore
     useEffect(() => {
         const loadProducts = async () => {
             setLoading(true);
-
             try {
-                let data = [];
-
-                // Filtrar productos por categoría si es necesario
                 const { payload: allProducts, error } = await getProducts();
+
                 if (error) {
                     console.error("Error al cargar productos", error);
+                    setProducts([]);
                 } else {
-                    if (category && allowedCategories.includes(category)) {
-                        data = allProducts.filter((product) => product.category === category);
-                    } else {
-                        data = allProducts;
-                    }
-                }
+                    let filteredProducts = allProducts;
 
-                setProducts(data);
+                    // 🔹 Si hay una categoría seleccionada, filtrar productos
+                    if (category && category.trim() !== "") {
+                        filteredProducts = allProducts.filter((product) => product.category === category);
+                    }
+
+                    setProducts(filteredProducts);
+                }
             } catch (error) {
                 console.error("Error al cargar productos:", error);
+                setProducts([]);
             } finally {
                 setLoading(false);
             }
         };
 
         loadProducts();
-    }, [category]);
+    }, [category]); // 🔹 Recargar productos al cambiar de categoría
 
-    if (loading) return <Load/>;
+    if (loading) return <Load />;
     if (!products.length) return <div>No hay productos para mostrar.</div>;
 
     return (

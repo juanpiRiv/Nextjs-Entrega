@@ -86,34 +86,34 @@ export default function Dashboard() {
                     placeholder="Nombre del producto"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="border p-2 w-full mb-2 text-black"
+                    className="border p-2 w-full mb-2 text-black rounded-xl"
                 />
                 <input
                     type="number"
                     placeholder="Precio"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    className="border p-2 w-full mb-2 text-black"
+                    className="border p-2 w-full mb-2 text-black rounded-xl"
                 />
                 <input
                     type="text"
                     placeholder="Categoría"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="border p-2 w-full mb-2 text-black"
+                    className="border p-2 w-full mb-2 text-black rounded-xl"
                 />
                 <textarea
                     placeholder="Descripción"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="border p-2 w-full mb-2 text-black"
+                    className="border p-2 w-full mb-2 text-black rounded-xl"
                 />
                 <input
                     type="text"
                     placeholder="URL de la imagen"
                     value={thumbnail}
                     onChange={(e) => setThumbnail(e.target.value)}
-                    className="border p-2 w-full mb-2 text-black"
+                    className="border p-2 w-full mb-2 text-black rounded-xl"
                 />
                 <Button onClick={addProduct} 
                 className="font-bold tracking-tighter"
