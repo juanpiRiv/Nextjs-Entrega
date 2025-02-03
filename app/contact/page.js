@@ -86,10 +86,10 @@ export default function ContactPage() {
                             sx={{
                                 mb: 2,
                                 "& .MuiInputLabel-root": {
-                                    color: "primary.main", 
+                                    color: "white", 
                                 },
                                 "& .MuiInputBase-root": {
-                                    color: "primary.main", 
+                                    color: "white", 
                                 },
                             }}
                             value={formData.nombre}
@@ -103,10 +103,10 @@ export default function ContactPage() {
                             sx={{
                                 mb: 2,
                                 "& .MuiInputLabel-root": {
-                                    color: "primary.main", 
+                                    color: "white", 
                                 },
                                 "& .MuiInputBase-root": {
-                                    color: "primary.main", 
+                                    color: "white", 
                                 },
                             }}
                             value={formData.correo}
@@ -122,10 +122,10 @@ export default function ContactPage() {
                             sx={{
                                 mb: 3,
                                 "& .MuiInputLabel-root": {
-                                    color: "primary.main",
+                                    color: "white",
                                 },
                                 "& .MuiInputBase-root": {
-                                    color: "primary.main", 
+                                    color: "white", 
                                 },
                             }}
                             value={formData.mensaje}
