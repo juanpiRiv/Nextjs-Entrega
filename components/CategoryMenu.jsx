@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -8,21 +8,21 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/services/firebase";
 
 export default function CategoryMenu() {
-    const [isOpen, setIsOpen] = useState(false); // Estado para controlar el Drawer
-    const [categories, setCategories] = useState([]); // 🔹 Estado para categorías dinámicas
+    const [isOpen, setIsOpen] = useState(false); 
+    const [categories, setCategories] = useState([]); 
     const searchParams = useSearchParams();
-    const category = searchParams.get("category"); // Categoría seleccionada
+    const category = searchParams.get("category");
 
-    // 🔹 Obtener categorías únicas desde los productos en Firestore
+    
     useEffect(() => {
         const fetchCategories = async () => {
             const querySnapshot = await getDocs(collection(db, "products"));
             const allCategories = querySnapshot.docs.map((doc) => doc.data().category);
 
-            // 🔹 Filtramos categorías duplicadas usando `Set`
+
             const uniqueCategories = [...new Set(allCategories)];
 
-            // 🔹 Agregamos "Todos los productos" como primera opción
+
             setCategories([{ name: "Todos los productos", value: "" }, ...uniqueCategories.map(name => ({ name, value: name }))]);
         };
 
@@ -30,7 +30,7 @@ export default function CategoryMenu() {
     }, []);
 
     const toggleDrawer = (open) => () => {
-        setIsOpen(open); // Cambiar el estado del Drawer
+        setIsOpen(open); 
     };
 
     const drawerContent = (
@@ -56,7 +56,7 @@ export default function CategoryMenu() {
                     >
                         <ListItemButton
                             selected={category === cat.value || (!category && cat.value === "")}
-                            onClick={toggleDrawer(false)} // Cerrar el Drawer al seleccionar una categoría
+                            onClick={toggleDrawer(false)} 
                             sx={{
                                 borderRadius: 2,
                                 mb: 1,
@@ -82,7 +82,7 @@ export default function CategoryMenu() {
 
     return (
         <>
-            {/* Botón para abrir el Sidebar (solo visible en móviles) */}
+
             <IconButton
                 edge="start"
                 color="primary"
@@ -104,7 +104,7 @@ export default function CategoryMenu() {
                 <MenuIcon sx={{ fontSize: 48 }} />
             </IconButton>
 
-            {/* Drawer para el Sidebar */}
+
             <Drawer
                 anchor="left"
                 open={isOpen}
@@ -121,7 +121,7 @@ export default function CategoryMenu() {
                 {drawerContent}
             </Drawer>
 
-            {/* Sidebar fijo para pantallas grandes */}
+
             <Box sx={{ display: { xs: "none", sm: "block" } }}>{drawerContent}</Box>
         </>
     );

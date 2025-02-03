@@ -1,4 +1,4 @@
-"use client";
+
 
 import { BoxReveal } from "@/components/ui/BoxReveal";
 import GppGoodTwoToneIcon from '@mui/icons-material/GppGoodTwoTone';

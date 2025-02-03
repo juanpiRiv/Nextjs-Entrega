@@ -26,8 +26,7 @@ export async function getProducts() {
     }
 }
 
-// Obtener un producto por su ID desde Firestore
-// actions/product.js
+
 export async function getProductById(id) {
     if (!id) {
         console.error("ID no proporcionado");

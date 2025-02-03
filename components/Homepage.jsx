@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 import { Box, Grid, Card, CardContent, Typography, Button } from "@mui/material";
 import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';

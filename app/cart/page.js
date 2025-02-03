@@ -2,24 +2,24 @@
 
 import React from "react";
 import useCartStore from "@/app/context/useCartStore";
-import { Box, Typography, Button, List, Divider } from "@mui/material"; // Asegúrate de importar Divider
-import { useRouter } from "next/navigation"; // Usamos el hook useRouter
+import { Box, Typography, Button, List, Divider } from "@mui/material";
+import { useRouter } from "next/navigation"; 
 import CartItem from "@/components/CartItem";
 
 export default function Cart() {
     const cart = useCartStore((state) => state.cart);
     const clearCart = useCartStore((state) => state.clearCart);
-    const router = useRouter(); // Usamos el hook useRouter
+    const router = useRouter();
     const removeItem = useCartStore((state) => state.removeItem);
 
-    // Función para calcular el precio total del carrito
+
     const getTotalPrice = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     };
 
     const handleCheckout = () => {
-        // Redirigir al usuario a la página de Checkout
-        router.push("/cart/checkout"); // Ruta correcta
+
+        router.push("/cart/checkout"); 
     };
 
     return (
@@ -45,7 +45,7 @@ export default function Cart() {
                         ))}
                     </List>
 
-                    <Divider sx={{ my: 2 }} /> {/* Este es el Divider que estaba causando el error */}
+                    <Divider sx={{ my: 2 }} /> 
 
                     <Typography variant="h6" className="font-bold tracking-tighter" sx={{ textAlign: "right", mb: 2, color: "white" }}>
                         Total: ${getTotalPrice().toFixed(2)}

@@ -11,7 +11,7 @@ export default function ProductsPage() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
 
-    // 🔹 Cargar productos desde Firestore
+
     useEffect(() => {
         const loadProducts = async () => {
             setLoading(true);
@@ -24,7 +24,7 @@ export default function ProductsPage() {
                 } else {
                     let filteredProducts = allProducts;
 
-                    // 🔹 Si hay una categoría seleccionada, filtrar productos
+                    
                     if (category && category.trim() !== "") {
                         filteredProducts = allProducts.filter((product) => product.category === category);
                     }
@@ -40,8 +40,7 @@ export default function ProductsPage() {
         };
 
         loadProducts();
-    }, [category]); // 🔹 Recargar productos al cambiar de categoría
-
+    }, [category]); 
     if (loading) return <Load />;
     if (!products.length) return <div>No hay productos para mostrar.</div>;
 

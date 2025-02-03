@@ -26,19 +26,18 @@ export default function Dashboard() {
         }
     }, [user, role, loading, isClient]);
 
-    // 🔹 Obtener productos desde Firestore
     const fetchProducts = async () => {
         const querySnapshot = await getDocs(collection(db, "products"));
         setProducts(querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
 
-    // 🔹 Obtener categorías existentes
+
     const fetchCategories = async () => {
         const querySnapshot = await getDocs(collection(db, "categories"));
         setCategories(querySnapshot.docs.map((doc) => doc.data().name));
     };
 
-    // 🔹 Agregar una nueva categoría si no existe
+
     const addCategoryIfNotExists = async (categoryName) => {
         if (!categories.includes(categoryName)) {
             await addDoc(collection(db, "categories"), { name: categoryName });
@@ -46,14 +45,14 @@ export default function Dashboard() {
         }
     };
 
-    // 🔹 Agregar producto y verificar categoría
+
     const addProduct = async () => {
         if (!title || !price || !description || !category || !thumbnail) {
             alert("Todos los campos son obligatorios");
             return;
         }
 
-        await addCategoryIfNotExists(category); // 🔹 Si la categoría no existe, la agrega
+        await addCategoryIfNotExists(category); 
 
         await addDoc(collection(db, "products"), { title, price, description, category, thumbnail });
 
@@ -65,7 +64,7 @@ export default function Dashboard() {
         fetchProducts();
     };
 
-    // 🔹 Eliminar producto
+
     const deleteProduct = async (id) => {
         await deleteDoc(doc(db, "products", id));
         fetchProducts();
@@ -78,7 +77,7 @@ export default function Dashboard() {
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Panel de Administración</h1>
 
-            {/* Agregar producto */}
+
             <div className="bg-background p-4 rounded shadow-md mb-6">
                 <h2 className="text-lg font-bold mb-2">Agregar Producto</h2>
                 <input
@@ -125,7 +124,7 @@ export default function Dashboard() {
                 </Button>
             </div>
 
-            {/* Lista de productos */}
+
             <ul className="space-y-4">
                 {products.map((product) => (
                     <li key={product.id} className="flex items-center justify-between bg-background p-4 rounded shadow-md">

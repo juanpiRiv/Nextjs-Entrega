@@ -2,9 +2,9 @@
 import { create } from "zustand";
 
 const useCartStore = create((set, get) => ({
-    cart: [], // Estado inicial del carrito
+    cart: [],
 
-    // Agregar un producto al carrito
+
     addToCart: (product) =>
         set((state) => {
             const existingProduct = state.cart.find((item) => item.id === product.id);
@@ -20,16 +20,15 @@ const useCartStore = create((set, get) => ({
             return { cart: [...state.cart, { ...product, quantity: product.quantity }] };
         }),
 
-    // Limpiar el carrito
+
     clearCart: () => set({ cart: [] }),
 
-    // Eliminar un producto del carrito
     removeItem: (id) =>
         set((state) => ({
             cart: state.cart.filter((item) => item.id !== id),
         })),
 
-    // Obtener la cantidad total de productos en el carrito
+
     getTotalQuantity: () => {
         const state = get();
         return state.cart.reduce((total, item) => total + item.quantity, 0);
