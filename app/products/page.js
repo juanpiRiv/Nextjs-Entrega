@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import Load from "@/components/Load";
 import { useSearchParams } from "next/navigation";
-import { getProducts } from "@/app/actions/product"; // Asegúrate de importar correctamente
+import { getProducts } from "@/app/actions/product"; 
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -11,13 +11,13 @@ export default function ProductsPage() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
 
-    // Usamos useMemo para memorizar la lista filtrada de productos
+
     const filteredProducts = useMemo(() => {
         if (category) {
             return products.filter((product) => product.category === category);
         }
         return products;
-    }, [category, products]); // Solo se recalcula cuando 'category' o 'products' cambian
+    }, [category, products]); 
 
     useEffect(() => {
         const loadProducts = async () => {

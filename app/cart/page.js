@@ -24,7 +24,7 @@ export default function Cart() {
         router.push("/cart/checkout"); 
     };
 
-    if (isLoading) return <Load />; // Muestra Load si la carga está activada
+    if (isLoading) return <Load />; 
 
     return (
         <Box sx={{ p: 4, maxWidth: 500, margin: "auto", backgroundColor: "background.default", borderRadius: 2, boxShadow: 2 }}>
