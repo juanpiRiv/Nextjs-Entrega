@@ -1,7 +1,4 @@
-# 💫 Sobre mí:
-🔭 Actualmente trabajando en<br>Desarrollo de aplicaciones web con Next.js y Firebase.<br><br>👯 Buscando colaborar en<br>Proyectos de código abierto en React y Next.js.<br><br>🤝 Buscando ayuda con<br>Optimización de rendimiento en aplicaciones Next.js.<br><br>🌱 Actualmente aprendiendo<br>Animaciones avanzadas con Framer Motion y MagicUI.<br><br>💬 Pregúntame sobre<br>Desarrollo full stack con React, Next.js y Firebase.<br><br>⚡ Dato curioso<br>Amante de la tecnología y siempre aprendiendo cosas nuevas.
 
----
 
 ## 🚀 Next.js E-Commerce con Firebase
 
