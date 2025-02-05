@@ -1,7 +1,9 @@
 "use client";
+
 import React, { useState } from "react";
 import { Container, Box, Typography, Grid, TextField, Button, IconButton, Snackbar, Alert } from "@mui/material";
 import { Email, Phone, AccessTime, Facebook, Instagram, LinkedIn, GitHub, WhatsApp } from "@mui/icons-material";
+import Load from "@/components/Load"; // Importa el componente Load
 
 export default function ContactPage() {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -10,6 +12,8 @@ export default function ContactPage() {
         correo: "",
         mensaje: ""
     });
+
+    const [isLoading, setIsLoading] = useState(false); // El estado de carga, por ejemplo, si estás esperando una API
 
     const handleSnackbarClose = () => {
         setSnackbarOpen(false);
@@ -20,9 +24,7 @@ export default function ContactPage() {
         // Guardar los datos en el localStorage
         localStorage.setItem("contactData", JSON.stringify(formData));
 
-
         setSnackbarOpen(true);
-
 
         setFormData({
             nombre: "",
@@ -30,6 +32,9 @@ export default function ContactPage() {
             mensaje: ""
         });
     };
+
+    // Mostrar el componente Load si isLoading es true
+    if (isLoading) return <Load />;
 
     return (
         <Box
@@ -75,7 +80,6 @@ export default function ContactPage() {
                             </Box>
                         </Grid>
                     </Grid>
-
 
                     <Box component="form" sx={{ mt: 4 }} onSubmit={handleSubmit}>
                         <TextField
@@ -136,7 +140,6 @@ export default function ContactPage() {
                         </Button>
                     </Box>
 
-
                     <Box display="flex" justifyContent="center" mt={3} sx={{ gap: 2 }}>
                         <IconButton href="https://www.instagram.com" color="primary" target="_blank" rel="noopener noreferrer" sx={{ "&:hover": { color: "#E1306C" } }}>
                             <Instagram fontSize="large" />
@@ -175,22 +178,6 @@ export default function ContactPage() {
                             ¡Mensaje enviado con éxito!
                         </Alert>
                     </Snackbar>
-
-
-                    <Box mt={4}>
-                        <Typography variant="h5" textAlign="center" fontWeight="bold" gutterBottom>
-                            Encuéntranos Aquí
-                        </Typography>
-                        <iframe
-                            title="Ubicación Falsa en el Mapa"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.337139372438!2d2.2922921156745384!3d48.85884407928778!2m3!1f0!2f45!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fc9d7c3ffdb%3A0x17d657fe6b9d6c0!2sEiffel%20Tower!5e0!3m2!1sen!2sfr!4v1611760137433!5m2!1sen!2sfr"
-                            width="100%"
-                            height="400"
-                            style={{ border: "0", borderRadius: "8px" }}
-                            allowFullScreen=""
-                            loading="lazy"
-                        ></iframe>
-                    </Box>
                 </Box>
             </Container>
         </Box>

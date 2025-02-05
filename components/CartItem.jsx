@@ -1,5 +1,5 @@
 
-
+import Image from "next/image";
 import React from "react";
 import { Box, Typography, IconButton } from "@mui/material";
 import { RemoveShoppingCart } from "@mui/icons-material";
@@ -7,10 +7,12 @@ import { RemoveShoppingCart } from "@mui/icons-material";
 const CartItem = ({ item, onRemove }) => {
     return (
         <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
-            <img
+            <Image
                 src={item.thumbnail || "https://via.placeholder.com/150"}
                 alt={item.title}
-                style={{ width: 50, height: 50, objectFit: "cover", marginRight: 10 }}
+                width={50}
+                height={50}
+                style={{ objectFit: "cover", marginRight: 10 }}
             />
             <Box sx={{ flexGrow: 1 }}>
                 <Typography variant="body1" className="font-bold tracking-tighter">{item.title}</Typography>

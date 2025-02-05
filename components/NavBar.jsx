@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Link from "next/link";
-import useCartStore from "@/app/context/useCartStore";
+import useCartStore from "@/hooks/useCartStore";
 import useAuthStore from "@/app/context/useAuthStore";
 
 const pages = ["Home", "Productos", "Contacto", "Sobre nosotros"];

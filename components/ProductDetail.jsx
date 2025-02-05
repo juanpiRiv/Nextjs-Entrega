@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import useCartStore from "@/app/context/useCartStore";
+import useCartStore from "@/hooks/useCartStore";
 import { Box, Typography, Button, IconButton, Snackbar, Alert } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";

@@ -1,38 +1,33 @@
 "use client";
 
-import React from "react";
-import useCartStore from "@/app/context/useCartStore";
+import React, { useState } from "react";
+import useCartStore from "@/hooks/useCartStore";
 import { Box, Typography, Button, List, Divider } from "@mui/material";
 import { useRouter } from "next/navigation"; 
 import CartItem from "@/components/CartItem";
+import Load from "@/components/Load"; // Importa Load
 
 export default function Cart() {
     const cart = useCartStore((state) => state.cart);
     const clearCart = useCartStore((state) => state.clearCart);
-    const router = useRouter();
     const removeItem = useCartStore((state) => state.removeItem);
+    const [isLoading, setIsLoading] = useState(false); // Estado de carga
 
+    const router = useRouter();
 
     const getTotalPrice = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     };
 
     const handleCheckout = () => {
-
+        setIsLoading(true); // Inicia la carga
         router.push("/cart/checkout"); 
     };
 
+    if (isLoading) return <Load />; // Muestra Load si la carga está activada
+
     return (
-        <Box
-            sx={{
-                p: 4,
-                maxWidth: 500,
-                margin: "auto",
-                backgroundColor: "background.default",
-                borderRadius: 2,
-                boxShadow: 2,
-            }}
-        >
+        <Box sx={{ p: 4, maxWidth: 500, margin: "auto", backgroundColor: "background.default", borderRadius: 2, boxShadow: 2 }}>
             <Typography variant="h4" className="font-bold tracking-tighter" sx={{ mb: 3, textAlign: "center" }}>
                 Carrito de Compras
             </Typography>
@@ -61,11 +56,7 @@ export default function Cart() {
                     </Box>
                 </>
             ) : (
-                <Typography
-                    className="font-bold tracking-tighter"
-                    variant="h6"
-                    sx={{ textAlign: "center", color: "text", mt: 3 }}
-                >
+                <Typography className="font-bold tracking-tighter" variant="h6" sx={{ textAlign: "center", color: "text", mt: 3 }}>
                     Tu carrito está vacío.
                 </Typography>
             )}

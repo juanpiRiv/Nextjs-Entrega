@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useMemo, useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
-import { getProducts } from "@/app/actions/product";
 import Load from "@/components/Load";
+import { useSearchParams } from "next/navigation";
+import { getProducts } from "@/app/actions/product"; // Asegúrate de importar correctamente
 
 export default function ProductsPage() {
     const [products, setProducts] = useState([]);
@@ -11,6 +11,13 @@ export default function ProductsPage() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
 
+    // Usamos useMemo para memorizar la lista filtrada de productos
+    const filteredProducts = useMemo(() => {
+        if (category) {
+            return products.filter((product) => product.category === category);
+        }
+        return products;
+    }, [category, products]); // Solo se recalcula cuando 'category' o 'products' cambian
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -22,14 +29,7 @@ export default function ProductsPage() {
                     console.error("Error al cargar productos", error);
                     setProducts([]);
                 } else {
-                    let filteredProducts = allProducts;
-
-                    
-                    if (category && category.trim() !== "") {
-                        filteredProducts = allProducts.filter((product) => product.category === category);
-                    }
-
-                    setProducts(filteredProducts);
+                    setProducts(allProducts);
                 }
             } catch (error) {
                 console.error("Error al cargar productos:", error);
@@ -40,15 +40,15 @@ export default function ProductsPage() {
         };
 
         loadProducts();
-    }, [category]); 
+    }, []); // Solo carga los productos una vez al cargar el componente
+
     if (loading) return <Load />;
-    if (!products.length) return <div>No hay productos para mostrar.</div>;
+    if (!filteredProducts.length) return <div>No hay productos para mostrar.</div>;
 
     return (
         <div>
-            {/* Mostrar los productos */}
             <div className="flex flex-wrap gap-4 justify-center">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Snackbar, Alert } from "@mui/material";
-import useCartStore from "@/app/context/useCartStore";
+import useCartStore from "@/hooks/useCartStore";
 import { useRouter } from "next/navigation";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/services/firebase";  // Importa desde firebaseConfig
+import Load from "@/components/Load"; // Importa el componente Load
 
 export default function Checkout() {
     const router = useRouter();
@@ -17,8 +18,9 @@ export default function Checkout() {
         address: "",
         codigoPostal: "",
     });
-    const [snackbarOpen, setSnackbarOpen] = useState(false);  // Estado para manejar el Snackbar
-    const [trackingCode, setTrackingCode] = useState("");  // Estado para almacenar el código de seguimiento
+    const [snackbarOpen, setSnackbarOpen] = useState(false);  
+    const [trackingCode, setTrackingCode] = useState("");  
+    const [isLoading, setIsLoading] = useState(false); // Estado de carga
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,31 +28,34 @@ export default function Checkout() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true); // Inicia la carga
 
         try {
-            // Agregar el pedido a Firebase y obtener el ID del documento
             const docRef = await addDoc(collection(db, "orders"), {
                 ...formData,
                 cart,
                 createdAt: new Date(),
             });
 
-            // Usamos el ID generado por Firebase como código de seguimiento
             setTrackingCode(docRef.id);
-            clearCart();  // Vaciar el carrito después de la compra
-            setSnackbarOpen(true);  // Mostrar el Snackbar
+            clearCart();  
+            setSnackbarOpen(true);  
         } catch (error) {
             console.error("Error al enviar el pedido:", error);
+        } finally {
+            setIsLoading(false); // Finaliza la carga
         }
     };
 
     const handleSnackbarClose = () => {
-        setSnackbarOpen(false);  // Cerrar el Snackbar
-        router.push("/");  // Redirige al inicio
+        setSnackbarOpen(false); 
+        router.push("/"); 
     };
 
+    if (isLoading) return <Load />; // Muestra el Load mientras se procesa la compra
+
     return (
-        <Box sx={{ p: 4, maxWidth: 500, margin: "auto", backgroundColor: "background.default", borderRadius: 2, boxShadow: 3 }}>
+        <Box sx={{ p: 4, maxWidth: 500, margin: "auto", backgroundColor: "background.default", borderRadius: 2, boxShadow: 3 , mt: 10}}>
             <Typography variant="h4" className="font-bold tracking-tighter" sx={{ mb: 3, textAlign: "center" }}>
                 Finalizar Compra
             </Typography>
@@ -65,14 +70,15 @@ export default function Checkout() {
                     required
                     InputLabelProps={{
                         style: {
-                            color: 'white', // Cambia el color de la etiqueta a blanco
+                            color: 'primary.main', // Color de la etiqueta
                         },
                     }}
                     InputProps={{
                         style: {
-                            color: 'white', // Cambia el color del texto dentro del input a blanco
+                            color: 'primary.main', // Color del texto dentro del input
                         },
                     }}
+                    focused
                 />
                 <TextField
                     fullWidth
@@ -85,14 +91,15 @@ export default function Checkout() {
                     required
                     InputLabelProps={{
                         style: {
-                            color: 'white', // Cambia el color de la etiqueta a blanco
+                            color: 'primary.main', // Color de la etiqueta
                         },
                     }}
                     InputProps={{
                         style: {
-                            color: 'white', // Cambia el color del texto dentro del input a blanco
+                            color: 'primary.main', // Color del texto dentro del input
                         },
                     }}
+                    focused
                 />
                 <TextField
                     fullWidth
@@ -104,14 +111,15 @@ export default function Checkout() {
                     required
                     InputLabelProps={{
                         style: {
-                            color: 'white', // Cambia el color de la etiqueta a blanco
+                            color: 'primary.main', // Color de la etiqueta
                         },
                     }}
                     InputProps={{
                         style: {
-                            color: 'white', // Cambia el color del texto dentro del input a blanco
+                            color: 'primary.main', // Color del texto dentro del input
                         },
                     }}
+                    focused
                 />
                 <TextField
                     fullWidth
@@ -123,21 +131,21 @@ export default function Checkout() {
                     required
                     InputLabelProps={{
                         style: {
-                            color: 'white', // Cambia el color de la etiqueta a blanco
+                            color: 'primary.main', // Color de la etiqueta
                         },
                     }}
                     InputProps={{
                         style: {
-                            color: 'white', // Cambia el color del texto dentro del input a blanco
+                            color: 'primary.main', // Color del texto dentro del input
                         },
                     }}
+                    focused
                 />
                 <Button variant="outlined" className="font-bold tracking-tighter" color="primary" type="submit" fullWidth>
                     Confirmar Pedido
                 </Button>
             </form>
 
-            {/* Snackbar para mostrar el código de seguimiento */}
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={7000}

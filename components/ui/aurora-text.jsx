@@ -13,7 +13,7 @@ export function AuroraText({
   return (
     <MotionComponent
       className={cn(
-        "relative inline-block text-transparent bg-clip-text animate-[aurora-text-animation_12s_ease-in-out_infinite_alternate]",
+        "relative inline-block text-transparent bg-clip-text animate-[aurora-text-animation_5s_ease-in-out_infinite_alternate]",
         className
       )}
       style={{
