@@ -33,49 +33,42 @@ Asegúrate de tener instalado:
 
 #### 📂 Clonar el repositorio
 
-bash´´
-git clone https://github.com/juanpiRiv/Nextjs-Entrega.git
-cd Nextjs-Entrega
+-git clone https://github.com/juanpiRiv/Nextjs-Entrega.git
+-cd Nextjs-Entrega
 📦 Instalar dependencias
-bash
-Copiar
-Editar
-npm install  # o yarn install
-🔑 Configurar Firebase
-Crea un archivo .env.local en la raíz del proyecto y agrega tus credenciales de Firebase:
 
-env
-Copiar
-Editar
-NEXT_PUBLIC_FIREBASE_API_KEY=TU_API_KEY
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=TU_AUTH_DOMAIN
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=TU_PROJECT_ID
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=TU_STORAGE_BUCKET
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=TU_MESSAGING_SENDER_ID
-NEXT_PUBLIC_FIREBASE_APP_ID=TU_APP_ID
+-npm install  # o yarn install
+🔑 Configurar Firebase
+-Crea un archivo .env.local en la raíz del proyecto y agrega tus credenciales de Firebase:
+
+-env
+-Copiar
+-Editar
+-NEXT_PUBLIC_FIREBASE_API_KEY=TU_API_KEY
+-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=TU_AUTH_DOMAIN
+-NEXT_PUBLIC_FIREBASE_PROJECT_ID=TU_PROJECT_ID
+-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=TU_STORAGE_BUCKET
+-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=TU_MESSAGING_SENDER_ID
+-NEXT_PUBLIC_FIREBASE_APP_ID=TU_APP_ID
 Asegúrate de configurar Firestore y Storage en tu consola de Firebase.
 
 🚀 Ejecutar el proyecto
-bash
-Copiar
-Editar
+
 npm run dev  # o yarn dev
-Abre http://localhost:3000 en tu navegador.
+-Abre http://localhost:3000 en tu navegador.
 
 🌍 Despliegue
-Puedes desplegar la aplicación fácilmente en Vercel:
+-Puedes desplegar la aplicación fácilmente en Vercel:
 
-bash
-Copiar
-Editar
-npm run build  # o yarn build
-vercel deploy
+
+-npm run build  # o yarn build
+-vercel deploy
 También puedes utilizar Firebase Hosting si prefieres alojarlo en Google Cloud.\*
 
 💻 Tecnologías utilizadas
-Frontend: Next.js 15, React 19, Tailwind CSS 4, Material UI, MagicUI
-Backend: Firebase (Auth, Firestore, Storage)
-Estado global: Zustand para manejo de estado
+-Frontend: Next.js 15, React 19, Tailwind CSS 4, Material UI, MagicUI
+-Backend: Firebase (Auth, Firestore, Storage)
+-Estado global: Zustand para manejo de estado
 
 
 
