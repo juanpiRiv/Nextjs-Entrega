@@ -33,7 +33,7 @@ Asegúrate de tener instalado:
 
 #### 📂 Clonar el repositorio
 
-\*
+bash´´
 git clone https://github.com/juanpiRiv/Nextjs-Entrega.git
 cd Nextjs-Entrega
 📦 Instalar dependencias
