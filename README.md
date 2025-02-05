@@ -33,7 +33,7 @@ Asegúrate de tener instalado:
 
 #### 📂 Clonar el repositorio
 
-```bash
+\*
 git clone https://github.com/juanpiRiv/Nextjs-Entrega.git
 cd Nextjs-Entrega
 📦 Instalar dependencias
@@ -70,7 +70,7 @@ Copiar
 Editar
 npm run build  # o yarn build
 vercel deploy
-También puedes utilizar Firebase Hosting si prefieres alojarlo en Google Cloud.
+También puedes utilizar Firebase Hosting si prefieres alojarlo en Google Cloud.\*
 
 💻 Tecnologías utilizadas
 Frontend: Next.js 15, React 19, Tailwind CSS 4, Material UI, MagicUI
