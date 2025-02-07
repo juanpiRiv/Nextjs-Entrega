@@ -54,7 +54,7 @@ function ResponsiveAppBar() {
         initAuth();
     }, [initAuth]);
 
-    // 🔹 Cierra el menú automáticamente cuando el usuario cambia
+
     React.useEffect(() => {
         setAnchorElUser(null);
     }, [user]);

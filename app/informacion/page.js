@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Typography, Card, CardContent } from "@mui/material";
 import { Timeline, TimelineItem, TimelineSeparator, TimelineDot, TimelineConnector, TimelineContent } from "@mui/lab";
 import { Work, School, TrendingUp, Forward } from "@mui/icons-material";
+import { MarqueeReviews } from "@/components/ui/MarqueeReviews" // Importamos el Marquee de reseñas
 
 export default function SobreNosotros() {
     return (
@@ -98,6 +99,14 @@ export default function SobreNosotros() {
                     </TimelineContent>
                 </TimelineItem>
             </Timeline>
+
+            {/* Sección de Reseñas con Marquee */}
+            <div className="mt-12">
+                <Typography variant="h6" align="center" fontWeight="bold" className="text-text tracking-tighter mb-4">
+                    Lo que dicen nuestros clientes
+                </Typography>
+                <MarqueeReviews />
+            </div>
         </Container>
     );
 }
