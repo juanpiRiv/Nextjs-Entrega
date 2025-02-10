@@ -1,5 +1,4 @@
-// Este es el archivo que define las funciones relacionadas con los productos
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore"; // 🔹 Agrega getDoc aquí
 import { db } from "@/services/firebase";
 
 // Función para obtener todos los productos
@@ -18,19 +17,18 @@ export async function getProducts() {
     }
 }
 
-// Función para obtener un producto por su ID
 export async function getProductById(id) {
     try {
-        const querySnapshot = await getDocs(collection(db, "products"));
-        const products = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
+        const docRef = doc(db, "products", id); // Asegúrate de que "products" es la colección principal
+        const docSnap = await getDoc(docRef); 
 
-        return { payload: products, error: false };
+        if (docSnap.exists()) {
+            return { payload: { id: docSnap.id, ...docSnap.data() }, error: false };
+        } else {
+            return { payload: null, error: true, message: "Producto no encontrado" };
+        }
     } catch (error) {
         console.error("Error al obtener producto:", error);
-        return { payload: [], error: true, message: error.message };
+        return { payload: null, error: true, message: error.message };
     }
 }
-

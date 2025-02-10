@@ -10,17 +10,18 @@ export default function useProduct(id) {
         if (!id) {
             console.error("ID no disponible");
             setError("ID de producto no disponible.");
+            setIsLoading(false);
             return;
         }
 
         const fetchProduct = async () => {
             try {
                 const { payload, error } = await getProductById(id);
-                if (error) {
+                if (error || !payload) {
                     setError("Producto no encontrado.");
                     setProduct(null);
                 } else {
-                    setProduct(payload[0]); 
+                    setProduct(payload); 
                 }
             } catch (err) {
                 console.error("Error al obtener el producto:", err);
