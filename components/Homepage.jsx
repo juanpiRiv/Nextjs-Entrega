@@ -6,7 +6,7 @@ import WatchTwoToneIcon from '@mui/icons-material/WatchTwoTone';
 
 const HomePage = () => {
     return (
-        <Box sx={{ backgroundColor: "secondary", padding: 8, minHeight: "60vh", mt: 5 }}>
+        <Box sx={{ backgroundColor: "secondary", padding: 8, minHeight: "60vh", mt: 2 }}>
             <Grid container spacing={4}>
                 {/* Tarjeta principal (grande) */}
                 <Grid item xs={12} md={8}>
@@ -49,7 +49,7 @@ const HomePage = () => {
                             <Typography variant="body1" className=" tracking-tighter"sx={{ marginBottom: 2 }}>
                                 Última generación de computadoras portátiles.
                             </Typography>
-                            <Button variant="outlined" className="font-bold tracking-tighter"color="accent">
+                            <Button href="/products" variant="outlined" className="font-bold tracking-tighter"color="accent">
                                 Explorar Colección →
                             </Button>
                         </CardContent>
@@ -177,7 +177,7 @@ const HomePage = () => {
                             <Typography variant="body2" className="tracking-tighter" sx={{ marginBottom: 2 }}>
                                 Lo que buscas para tu dispositivo.
                             </Typography>
-                            <Button variant="outlined" className="font-bold tracking-tighter" color="accent">
+                            <Button href="/contact" variant="outlined" className="font-bold tracking-tighter" color="accent">
                                 Contáctanos Ahora
                             </Button>
                         </CardContent>

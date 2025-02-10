@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, getDoc } from "firebase/firestore"; // 🔹 Agrega getDoc aquí
+import { collection, getDocs, doc, getDoc , query, where, limit} from "firebase/firestore"; // 🔹 Agrega getDoc aquí
 import { db } from "@/services/firebase";
 
 // Función para obtener todos los productos
@@ -32,3 +32,17 @@ export async function getProductById(id) {
         return { payload: null, error: true, message: error.message };
     }
 }
+    
+    export async function getBestSellingLaptops() {
+        try {
+            const q = query(collection(db, "products"), where("category", "==", "laptops"), limit(4));
+            const querySnapshot = await getDocs(q);
+    
+            const laptops = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    
+            return { laptops, error: false };
+        } catch (error) {
+            console.error("Error al obtener laptops más vendidas:", error);
+            return { laptops: [], error: true, message: error.message };
+        }
+    }
