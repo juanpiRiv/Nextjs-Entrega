@@ -105,14 +105,25 @@ function ResponsiveAppBar() {
                             transformOrigin={{ vertical: "top", horizontal: "left" }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
+                            PaperProps={{
+                                sx: {
+                                    bgcolor: "background.default", // Usa el color de fondo del tema
+                                    color: "white", // Color del texto
+                                    borderRadius: 0, // Elimina bordes redondeados
+                                    boxShadow: "none", // Elimina cualquier sombra
+                                }
+                            }}
+                            
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                <MenuItem key={page} onClick={handleCloseNavMenu}
+                                sx={{ 
+                                    bgcolor: "background.default"}}>
                                     <Link
                                         href={page === "Productos" ? "/products" : page === "Contacto" ? "/contact" : page === "Sobre nosotros" ? "/informacion" : "/"}
                                         passHref
                                     >
-                                        <Typography sx={{ textAlign: "center", color: "black" }}>
+                                        <Typography sx={{ textAlign: "center", color: "text" }}>
                                             {page}
                                         </Typography>
                                     </Link>
@@ -183,23 +194,31 @@ function ResponsiveAppBar() {
                                     transformOrigin={{ vertical: "top", horizontal: "right" }}
                                     open={Boolean(anchorElUser)}
                                     onClose={handleCloseUserMenu}
+                                    PaperProps={{
+                                        sx: {
+                                            bgcolor: "background.default", // Usa el color de fondo del tema
+                                            color: "white", // Color del texto
+                                            borderRadius: 0, // Elimina bordes redondeados
+                                            boxShadow: "none", // Elimina cualquier sombra
+                                        }
+                                    }}
                                 >
                                     <MenuItem disabled>
-                                        <Typography sx={{ color: "black", textAlign: "center" }}>
+                                        <Typography sx={{ color: "text", textAlign: "center" }}>
                                             {user.email}
                                         </Typography>
                                     </MenuItem>
                                     {role === "admin" && (
-                                        <MenuItem onClick={handleCloseUserMenu}>
+                                        <MenuItem onClick={handleCloseUserMenu} sx={{ bgcolor: "background.default" }}>
                                             <Link href="/dashboard">
-                                                <Typography sx={{ color: "black", textAlign: "center" }}>
+                                                <Typography sx={{ color: "text", textAlign: "center"  }}>
                                                     Panel Admin
                                                 </Typography>
                                             </Link>
                                         </MenuItem>
                                     )}
                                     <MenuItem onClick={() => logout()}>
-                                        <Typography sx={{ color: "black", textAlign: "center" }}>
+                                        <Typography sx={{ color: "text", textAlign: "center" }}>
                                             Cerrar sesión
                                         </Typography>
                                     </MenuItem>
