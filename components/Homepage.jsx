@@ -16,7 +16,7 @@ const HomePage = () => {
                         {/* Imagen de fondo con next/image */}
                         <Box sx={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}>
                             <Image
-                                src="/laptop2.jpg"
+                                src="/Laptop2.jpg"
                                 alt="Laptops"
                                 fill
                                 quality={100}
