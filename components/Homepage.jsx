@@ -35,7 +35,7 @@ const HomePage = () => {
                             <Typography variant="body1" sx={{ marginBottom: 2 }}>
                                 Última generación de computadoras portátiles.
                             </Typography>
-                            <Button component={Link} href="/products" variant="outlined" color="accent">
+                            <Button component={Link} href="/products" variant="outlined" color="accent" className="font-bold tracking-tighter">
                                 Explorar Colección →
                             </Button>
                         </CardContent>
@@ -83,7 +83,7 @@ const HomePage = () => {
                                     </Typography>
                                 )}
                                 {link && btnText && (
-                                    <Button component={Link} href={link} variant="outlined" color="accent">
+                                    <Button className="font-bold tracking-tighter" component={Link} href={link} variant="outlined" color="accent">
                                         {btnText}
                                     </Button>
                                 )}
